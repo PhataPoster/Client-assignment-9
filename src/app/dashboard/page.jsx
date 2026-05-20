@@ -1,9 +1,18 @@
+import DashboardMain from '@/components/DashboardMain';
+import { deleteAppointment, updateAppointment } from '@/lib/actions';
+import { fetchAppointmentData } from '@/services/data';
 import React from 'react';
 
-const DashboardPage = () => {
+
+const DashboardPage = async () => {
+    const bookings = await fetchAppointmentData();
     return (
-        <div>
-            <p>Dashboard</p>
+        <div className='bg-emerald-50 '>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-stretch py-12' >
+                <h1 className='text-4xl font-bold bg-linear-to-l from-emerald-400 to-emerald-700 bg-clip-text text-transparent text-center'>Dashboard</h1>
+                <p className='text-lg text-gray-600 mt-4 mb-8 text-center'>Welcome to your dashboard!</p>
+                <DashboardMain bookings={bookings} deleteActionAppointment={deleteAppointment} updateActionAppointment={updateAppointment} ></DashboardMain>
+            </div>
         </div>
     );
 };
