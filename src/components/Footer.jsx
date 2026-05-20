@@ -13,7 +13,7 @@ const socialLinks = [
 
 export function MainFooter() {
   return (
-    <footer className="mt-16 border-t border-emerald-200/80 bg-[radial-gradient(circle_at_12%_-20%,rgba(16,185,129,0.14),transparent_44%),radial-gradient(circle_at_88%_120%,rgba(20,184,166,0.14),transparent_38%),linear-gradient(180deg,#f8fffd_0%,#ecfdf5_100%)]">
+    <footer className="border-t border-emerald-200/80 bg-[radial-gradient(circle_at_12%_-20%,rgba(16,185,129,0.14),transparent_44%),radial-gradient(circle_at_88%_120%,rgba(20,184,166,0.14),transparent_38%),linear-gradient(180deg,#f8fffd_0%,#ecfdf5_100%)]">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-12">
           <div className="md:col-span-5">

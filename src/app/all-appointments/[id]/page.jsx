@@ -1,3 +1,4 @@
+import { BookAppointmentForm } from '@/components/BookAppointmentForm';
 import { fetchDoctorDetailsData } from '@/services/data';
 import { Button } from '@heroui/react';
 import { MapPin, Clock, Star, Hospital, HandCoins, HandCoinsIcon } from 'lucide-react';
@@ -10,15 +11,18 @@ const DoctorDetailsPage = async ({ params }) => {
     const doctorDetailsData = await fetchDoctorDetailsData(id);
     // console.log(id);
     return (
-        <div className='bg-emerald-50 h-'>
-            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row gap-10 justify-center items-center'>
+        <div className='bg-emerald-50 '>
+            <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row gap-14 justify-center items-center'>
                 <div className='flex flex-col gap-2 items-center text-center md:text-left bg-white rounded-2xl overflow-hidden'>
-                    <Image
-                        src={doctorDetailsData?.image}
-                        alt={doctorDetailsData?.name}
-                        width={250}
-                        height={200}
-                    />
+                    <div className="relative w-full md:w-92 h-92 bg-slate-100">
+                        <Image
+                            src={doctorDetailsData?.image}
+                            alt={doctorDetailsData?.name}
+                            fill
+                            className="object-cover w-full h-full"
+                            sizes="(max-width: 768px) 100vw, 256px"
+                        />
+                    </div>
                     <div className='p-2'>
                         <h3 className="text-xl font-bold text-slate-900">{doctorDetailsData?.name}</h3>
 
@@ -43,7 +47,7 @@ const DoctorDetailsPage = async ({ params }) => {
                             <p className='text-sm text-gray-500 '>Location</p>
                             <div className="flex items-center gap-2 text-sm text-slate-600">
                                 <div className='p-2 bg-emerald-50 border border-emerald-500 rounded-xl shadow-2xl shadow-emerald-200'>
-                                    <MapPin className="h-4 w-4 flex-shrink-0 text-teal-600" />
+                                    <MapPin className="h-4 w-4 shrink-0 text-teal-600" />
                                 </div>
                                 <span>{doctorDetailsData.location}</span>
                             </div>
@@ -51,8 +55,8 @@ const DoctorDetailsPage = async ({ params }) => {
                         <div className='bg-white border-2 border-emerald-500 p-3 rounded-2xl shadow-xl mt-4'>
                             <p className='text-sm text-gray-500 '>Experience</p>
                             <div className="flex items-center gap-2 text-sm text-slate-600">
-                                <div className='p-2 bg-emerald-50 border border-emerald-500 rounded-xl shadow-2xl shadow-emerald-200'>
-                                    <Clock className="h-4 w-4 flex-shrink-0 text-teal-600" />
+                                    <div className='p-2 bg-emerald-50 border border-emerald-500 rounded-xl shadow-2xl shadow-emerald-200'>
+                                    <Clock className="h-4 w-4 shrink-0 text-teal-600" />
                                 </div>
                                 <span>{doctorDetailsData.experience}</span>
                             </div>
@@ -60,8 +64,8 @@ const DoctorDetailsPage = async ({ params }) => {
                         <div className='bg-white border-2 border-emerald-500 p-3 rounded-2xl shadow-xl mt-4'>
                             <p className='text-sm text-gray-500 '>Hospital</p>
                             <div className="flex items-center gap-2 text-sm text-slate-600">
-                                <div className='p-2 bg-emerald-50 border border-emerald-500 rounded-xl shadow-2xl shadow-emerald-200'>
-                                    <Hospital className="h-4 w-4 flex-shrink-0 text-teal-600" />
+                                    <div className='p-2 bg-emerald-50 border border-emerald-500 rounded-xl shadow-2xl shadow-emerald-200'>
+                                    <Hospital className="h-4 w-4 shrink-0 text-teal-600" />
                                 </div>
                                 <span>{doctorDetailsData.hospital}</span>
                             </div>
@@ -69,8 +73,8 @@ const DoctorDetailsPage = async ({ params }) => {
                         <div className='bg-white border-2 border-emerald-500 p-3 rounded-2xl shadow-xl mt-4'>
                             <p className='text-sm text-gray-500 '>Consultation Fee</p>
                             <div className="flex items-center gap-2 text-sm text-slate-600">
-                                <div className='p-2 bg-emerald-50 border border-emerald-500 rounded-xl shadow-2xl shadow-emerald-200'>
-                                    <HandCoins className="h-4 w-4 flex-shrink-0 text-teal-600" />
+                                    <div className='p-2 bg-emerald-50 border border-emerald-500 rounded-xl shadow-2xl shadow-emerald-200'>
+                                    <HandCoins className="h-4 w-4 shrink-0 text-teal-600" />
                                 </div>
                                 <span>{doctorDetailsData.fee}</span>
                             </div>
@@ -86,9 +90,7 @@ const DoctorDetailsPage = async ({ params }) => {
                             ))
                         }
                     </div>
-                    <Button className=" rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 font-semibold text-white mt-2">
-                        Book Appointment
-                    </Button>
+                    <BookAppointmentForm doctorDetailsData={doctorDetailsData} />
                 </div>
 
             </div>
