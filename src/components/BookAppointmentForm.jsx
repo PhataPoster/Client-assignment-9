@@ -3,7 +3,11 @@
 import { Envelope } from "@gravity-ui/icons";
 import { Button, Input, Label, ListBox, Modal, Surface, TextField, Select } from "@heroui/react";
 
-export function BookAppointmentForm({ doctorDetailsData }) {
+export function BookAppointmentForm({ doctorDetailsData, createAppointmentAction }) {
+
+
+
+
     return (
         <Modal>
             <Button className=" rounded-full bg-linear-to-r from-emerald-500 to-teal-500 font-semibold text-white mt-2">
@@ -17,9 +21,9 @@ export function BookAppointmentForm({ doctorDetailsData }) {
                             <Modal.Heading>Book Appointment</Modal.Heading>
                             <p className="text-sm text-gray-500">with {doctorDetailsData.name}</p>
                         </Modal.Header>
-                        <Modal.Body className="">
+                        <Modal.Body className="px-2">
                             <Surface variant="default">
-                                <form className="flex flex-col gap-4">
+                                <form action={createAppointmentAction} className="flex flex-col gap-4">
                                     <TextField className="w-full" name="email" type="email" variant="secondary">
                                         <Label>User Email</Label>
                                         <Input placeholder="Enter your email" />
@@ -80,6 +84,11 @@ export function BookAppointmentForm({ doctorDetailsData }) {
                                         <Label>Reason(Optional)</Label>
                                         <Input placeholder="Brief description for the appointment" />
                                     </TextField>
+                                    <input
+                                        type="hidden"
+                                        name="doctorId"
+                                        value={doctorDetailsData._id}
+                                    />
                                     <Modal.Footer>
                                         <Button className=" rounded-full bg-linear-to-r from-emerald-500 to-teal-500 font-semibold text-white mt-2 w-full" type="submit">
                                             Confirm Booking

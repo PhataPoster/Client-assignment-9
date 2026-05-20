@@ -1,4 +1,5 @@
 import { BookAppointmentForm } from '@/components/BookAppointmentForm';
+import { createAppointment } from '@/lib/actions';
 import { fetchDoctorDetailsData } from '@/services/data';
 import { Button } from '@heroui/react';
 import { MapPin, Clock, Star, Hospital, HandCoins, HandCoinsIcon } from 'lucide-react';
@@ -90,7 +91,7 @@ const DoctorDetailsPage = async ({ params }) => {
                             ))
                         }
                     </div>
-                    <BookAppointmentForm doctorDetailsData={doctorDetailsData} />
+                    <BookAppointmentForm doctorDetailsData={doctorDetailsData} createAppointmentAction = {createAppointment} />
                 </div>
 
             </div>
