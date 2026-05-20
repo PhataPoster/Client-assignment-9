@@ -1,6 +1,7 @@
 import React from 'react';
 import { MapPin, Clock, Star } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const DoctorCard = ({ doctor }) => {
     // Fallback data if doctor is not provided
@@ -67,9 +68,11 @@ const DoctorCard = ({ doctor }) => {
                         <p className="text-xs text-slate-500 font-medium">Consultation</p>
                         <p className="text-lg font-bold text-slate-900">৳{docData.fee}</p>
                     </div>
-                    <button className="rounded-full bg-linear-to-r from-emerald-500 to-teal-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-teal-700 hover:shadow-lg active:scale-95 cursor-pointer">
-                        View Details
-                    </button>
+                    <Link href={`/all-appointments/${docData._id}`}>
+                        <button className="rounded-full bg-linear-to-r from-emerald-500 to-teal-500 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all duration-300 hover:bg-teal-700 hover:shadow-lg active:scale-95 cursor-pointer">
+                            View Details
+                        </button>
+                    </Link>
                 </div>
             </div>
         </div>

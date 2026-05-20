@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@heroui/react";
 import Image from "next/image";
 import Logo from "../assets/appointment.png";
+import { usePathname } from "next/navigation";
 
 export function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +17,13 @@ export function MainNavbar() {
     { label: "All Appointment", href: "/all-appointments" },
     { label: "Dashboard", href: "/dashboard" },
   ];
+
+  const pathname = usePathname() || "/";
+
+  const isActive = (href) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -51,15 +59,22 @@ export function MainNavbar() {
           </div>
 
           <div className="hidden items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50/70 px-2 py-1 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-semibold text-emerald-800 transition-colors hover:bg-emerald-100 hover:text-emerald-950"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+                    active
+                      ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md"
+                      : "text-emerald-800 hover:bg-emerald-100 hover:text-emerald-950"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden md:flex items-center gap-4">
@@ -92,22 +107,27 @@ export function MainNavbar() {
       {isMenuOpen && (
         <div className="animate-in slide-in-from-top duration-300 border-b border-emerald-200 bg-white px-4 pb-6 pt-2 md:hidden">
           <div className="space-y-2">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block rounded-xl px-4 py-3 text-base font-medium text-emerald-900 transition-colors hover:bg-emerald-50"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const active = isActive(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`block rounded-xl px-4 py-3 text-base font-medium transition-colors ${
+                    active ? "bg-emerald-100 text-emerald-900" : "text-emerald-900 hover:bg-emerald-50"
+                  }`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="mt-4 border-t border-emerald-100 pt-4">
             <div className="grid grid-cols-2 gap-4">
               <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="bordered" className="w-full rounded-xl border-emerald-300 text-emerald-800">
+                <Button variant="bordered" className="w-full rounded-xl border-emerald-300 text-emerald-800 ">
                   Login
                 </Button>
               </Link>
