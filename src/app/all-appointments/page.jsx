@@ -1,6 +1,6 @@
 import AllAppointmentHeader from "@/components/AllAppointmentHeader";
 import DoctorCard from "@/components/DoctorCard";
-import { fetchDoctorsData } from "@/services/data";
+import { fetchDoctorsData, fetchSearchData } from "@/services/data";
 // import { Button } from "@heroui/react"
 import { ClipboardList } from "lucide-react";
 // import { BookOpen, Filter } from "lucide-react";
@@ -11,8 +11,7 @@ const AllAppointmentPage = async ({ searchParams }) => {
     // console.log(sParams);
 
 
-    const doctors = await fetchDoctorsData(sParams?.searchTerm || "");
-
+    const doctors = await fetchDoctorsData( sParams?.searchTerm || "" );
 
     return (
         <div className="min-h-screen bg-slate-50">
