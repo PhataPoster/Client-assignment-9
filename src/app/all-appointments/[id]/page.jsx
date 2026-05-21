@@ -8,7 +8,7 @@ import React from 'react';
 
 const DoctorDetailsPage = async ({ params }) => {
     const { id } = await params
-    console.log(id);
+    // console.log(id);
     const doctorDetailsData = await fetchDoctorDetailsData(id);
     // console.log(id);
     return (

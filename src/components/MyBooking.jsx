@@ -23,7 +23,7 @@ const MyBooking = ({ bookings, deleteAction, updateAction }) => {
     return (
         <div className='flex flex-col gap-4 w-full'>
             {bookings?.map((booking) => (
-                <div key={booking?._id} className='w-full flex justify-between bg-white rounded-2xl shadow-md p-8 items-center'>
+                <div key={booking?._id} className='w-full flex flex-col sm:flex-row gap-4 justify-between bg-white rounded-2xl shadow-md p-8 items-center'>
                     <div className='flex flex-col gap-2'>
                         <h3 className='text-xl font-semibold text-emerald-600'>Doctor: {booking?.doctor}</h3>
                         <p className='flex items-center gap-2 mt-2'><IoPersonCircleSharp /> Patient: {booking?.name}</p>

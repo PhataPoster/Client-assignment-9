@@ -46,7 +46,7 @@ export function MainNavbar() {
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2 group">
-              <div className="rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 p-1 shadow-sm">
+              <div className="rounded-2xl bg-linear-to-br from-emerald-100 to-teal-100 p-1 shadow-sm">
                 <Image
                   width={40}
                   height={40}
@@ -70,7 +70,7 @@ export function MainNavbar() {
                   href={link.href}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
                     active
-                      ? "bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-md"
+                      ? "bg-linear-to-r from-emerald-500 to-teal-500 text-white shadow-md"
                       : "text-emerald-800 hover:bg-emerald-100 hover:text-emerald-950"
                   }`}
                 >
@@ -80,30 +80,35 @@ export function MainNavbar() {
             })}
           </div>
 
-          {
-            !user ? <div className="hidden md:flex items-center gap-4">
-            <Link href="/login">
-              <Button className ="text-sm font-semibold text-emerald-800 transition-colors hover:text-emerald-950 bg-emerald-100 px-8">Login</Button>
-            </Link>
-            <Link href="/register">
-              <Button className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-8 font-bold text-white shadow-lg shadow-emerald-700/20">
-                Register
-              </Button>
-            </Link>
-          </div> : <div className="flex justify-center items-center gap-4">
-                <p className="text-sm text-gray-500">Welcome, {user.name}!</p>
-                <Avatar>
-                  <Avatar.Image
-                    alt={user?.name}
-                    src={user?.image}
-                    referrerPolicy="no-referrer" />
-                  <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
-                </Avatar>
-                <Button variant="danger" onClick={() => authClient.signOut()}>
-                  Logout
+          {!user ? (
+            <div className="hidden md:flex items-center gap-4">
+              <Link href="/login">
+                <Button className="text-sm font-semibold text-emerald-800 transition-colors hover:text-emerald-950 bg-emerald-100 px-8">
+                  Login
                 </Button>
-              </div>
-          }
+              </Link>
+              <Link href="/register">
+                <Button className="rounded-full bg-linear-to-r from-emerald-500 to-teal-500 px-8 font-bold text-white shadow-lg shadow-emerald-700/20">
+                  Register
+                </Button>
+              </Link>
+            </div>
+          ) : (
+            <div className="hidden md:flex items-center gap-4">
+              <p className="text-sm text-gray-500">Welcome, {user.name}!</p>
+              <Avatar>
+                <Avatar.Image
+                  alt={user?.name}
+                  src={user?.image}
+                  referrerPolicy="no-referrer"
+                />
+                <Avatar.Fallback>{user?.name?.[0]}</Avatar.Fallback>
+              </Avatar>
+              <Button variant="danger" onClick={() => authClient.signOut()}>
+                Logout
+              </Button>
+            </div>
+          )}
 
           <div className="md:hidden flex items-center">
             <button
@@ -139,18 +144,37 @@ export function MainNavbar() {
           </div>
 
           <div className="mt-4 border-t border-emerald-100 pt-4">
-            <div className="grid grid-cols-2 gap-4">
-              <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                <Button variant="bordered" className="w-full rounded-xl border-emerald-300 text-emerald-800 ">
-                  Login
+            {!user ? (
+              <div className="grid grid-cols-2 gap-4">
+                <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+                  <Button variant="bordered" className="w-full rounded-xl border-emerald-300 text-emerald-800 ">
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/register" onClick={() => setIsMenuOpen(false)}>
+                  <Button className="w-full rounded-xl bg-linear-to-r from-emerald-500 to-teal-500 font-semibold text-white">
+                    Register
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <Avatar>
+                    <Avatar.Image
+                      alt={user?.name}
+                      src={user?.image}
+                      referrerPolicy="no-referrer"
+                    />
+                    <Avatar.Fallback>{user?.name?.[0]}</Avatar.Fallback>
+                  </Avatar>
+                  <p className="text-sm font-semibold text-emerald-900">{user?.name}</p>
+                </div>
+                <Button variant="danger" onClick={() => authClient.signOut()}>
+                  Logout
                 </Button>
-              </Link>
-              <Link href="/register" onClick={() => setIsMenuOpen(false)}>
-                <Button className="w-full rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 font-semibold text-white">
-                  Register
-                </Button>
-              </Link>
-            </div>
+              </div>
+            )}
           </div>
         </div>
       )}

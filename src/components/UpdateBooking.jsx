@@ -16,7 +16,7 @@ export function UpdateBooking({ booking, updateAction }) {
             <Button variant='outline' className='flex justify-center items-center gap-2'> <MdModeEdit />Update Booking</Button>
             <Modal.Backdrop>
                 <Modal.Container placement="auto">
-                    <Modal.Dialog className="sm:max-w-xl h-auto">
+                    <Modal.Dialog className=" max-w-3/4 sm:max-w-xl h-auto">
                         <Modal.CloseTrigger />
                         <Modal.Header>
 

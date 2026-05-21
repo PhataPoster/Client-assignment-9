@@ -17,7 +17,7 @@ const DoctorCard = ({ doctor }) => {
     };
 
     return (
-        <div className="w-full max-w-sm rounded-2xl border border-slate-200 bg-white shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl shadow-emerald-100 hover:-translate-y-1">
+        <div className="w-full  rounded-2xl border border-slate-200 bg-white shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl shadow-emerald-100 hover:-translate-y-1">
 
             <div className="relative h-64 overflow-hidden bg-slate-100">
                 <Image
