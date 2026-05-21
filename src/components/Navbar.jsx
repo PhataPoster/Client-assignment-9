@@ -78,11 +78,8 @@ export function MainNavbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Link
-              href="/login"
-              className="text-sm font-semibold text-emerald-800 transition-colors hover:text-emerald-950"
-            >
-              Login
+            <Link href="/login">
+              <Button className ="text-sm font-semibold text-emerald-800 transition-colors hover:text-emerald-950 bg-emerald-100 px-8">Login</Button>
             </Link>
             <Link href="/register">
               <Button className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 px-8 font-bold text-white shadow-lg shadow-emerald-700/20">

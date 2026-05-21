@@ -2,6 +2,7 @@ import { Outfit} from "next/font/google";
 import "./globals.css";
 import { MainNavbar } from "@/components/Navbar";
 import { MainFooter } from "@/components/Footer";
+import { ToastContainer } from "react-toastify";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
       className={`${outfit.variable} h-full antialiased`}
     >
       <body className="min-h-screen flex flex-col bg-emerald-50/20">
+        <ToastContainer />
         <MainNavbar />
         <main className="flex-1">{children}</main>
         <MainFooter />
