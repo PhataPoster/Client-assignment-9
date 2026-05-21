@@ -3,14 +3,17 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { Button } from "@heroui/react";
+import { Avatar, Button } from "@heroui/react";
 import Image from "next/image";
 import Logo from "../assets/appointment.png";
 import { usePathname } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 export function MainNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const userData = authClient.useSession();
+  const user = userData?.data?.user;
 
   const navLinks = [
     { label: "Home", href: "/" },
@@ -77,7 +80,8 @@ export function MainNavbar() {
             })}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          {
+            !user ? <div className="hidden md:flex items-center gap-4">
             <Link href="/login">
               <Button className ="text-sm font-semibold text-emerald-800 transition-colors hover:text-emerald-950 bg-emerald-100 px-8">Login</Button>
             </Link>
@@ -86,7 +90,20 @@ export function MainNavbar() {
                 Register
               </Button>
             </Link>
-          </div>
+          </div> : <div className="flex justify-center items-center gap-4">
+                <p className="text-sm text-gray-500">Welcome, {user.name}!</p>
+                <Avatar>
+                  <Avatar.Image
+                    alt={user?.name}
+                    src={user?.image}
+                    referrerPolicy="no-referrer" />
+                  <Avatar.Fallback>{user?.name[0]}</Avatar.Fallback>
+                </Avatar>
+                <Button variant="danger" onClick={() => authClient.signOut()}>
+                  Logout
+                </Button>
+              </div>
+          }
 
           <div className="md:hidden flex items-center">
             <button
