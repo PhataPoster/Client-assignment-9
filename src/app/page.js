@@ -16,3 +16,16 @@ export default async function Home() {
     </div>
   );
 }
+
+export const metadata = {
+  title: "Home | DocAppoint",
+  description:
+    "DocAppoint — Book trusted doctors, manage appointments, and get notified about bookings.",
+  openGraph: {
+    title: "Home | DocAppoint",
+    description:
+      "DocAppoint — Book trusted doctors, manage appointments, and get notified about bookings.",
+    url: "https://client-doc-appointment.vercel.app",
+    siteName: "DocAppoint",
+  },
+};

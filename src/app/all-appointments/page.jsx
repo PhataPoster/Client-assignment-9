@@ -40,3 +40,13 @@ const AllAppointmentPage = async ({ searchParams }) => {
 };
 
 export default AllAppointmentPage;
+
+export const metadata = {
+    title: "All Doctors | DocAppoint",
+    description: "Browse all available doctors, filter by specialty, and book appointments with trusted practitioners.",
+    openGraph: {
+        title: "All Doctors | DocAppoint",
+        description: "Browse and book appointments with trusted doctors.",
+        url: "https://client-doc-appointment.vercel.app/all-appointments",
+    },
+};

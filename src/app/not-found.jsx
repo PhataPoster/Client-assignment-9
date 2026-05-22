@@ -54,3 +54,8 @@ const NotFoundPage = () => {
 };
 
 export default NotFoundPage;
+
+export const metadata = {
+    title: "404 - Page Not Found | DocAppoint",
+    description: "The page you are looking for cannot be found.",
+};

@@ -105,3 +105,13 @@ const DoctorDetailsPage = async ({ params }) => {
 };
 
 export default DoctorDetailsPage;
+
+export const metadata = {
+    title: "Doctor Details | DocAppoint",
+    description: "View doctor profile, biography, and available time slots. Book an appointment directly from the profile.",
+    openGraph: {
+        title: "Doctor Details | DocAppoint",
+        description: "View doctor profile and book appointments.",
+        url: "https://client-doc-appointment.vercel.app/all-appointments",
+    },
+};

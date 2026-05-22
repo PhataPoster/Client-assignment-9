@@ -23,3 +23,13 @@ const DashboardPage = async () => {
 };
 
 export default DashboardPage;
+
+export const metadata = {
+    title: "Dashboard | DocAppoint",
+    description: "Your dashboard – manage your bookings, update appointments, and view schedules.",
+    openGraph: {
+        title: "Dashboard | DocAppoint",
+        description: "Manage bookings and appointments in your DocAppoint dashboard.",
+        url: "https://client-doc-appointment.vercel.app/dashboard",
+    },
+};
