@@ -1,15 +1,34 @@
 "use client";
 
+import { useState } from "react";
 import { Envelope } from "@gravity-ui/icons";
 import { Button, Input, Label, ListBox, Modal, Surface, TextField, Select } from "@heroui/react";
+import { toast } from "react-toastify";
 
 export function BookAppointmentForm({ doctorDetailsData, createAppointmentAction }) {
+    const [isOpen, setIsOpen] = useState(false);
 
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+        const appointmentData = Object.fromEntries(formData.entries());
 
-
-
+        try {
+            const result = await createAppointmentAction(appointmentData);
+            if (result) {
+                toast.success("Booking confirmed");
+                form.reset();
+                setIsOpen(false);
+            } else {
+                toast.error("Booking failed. Please try again.");
+            }
+        } catch (error) {
+            toast.error("Booking failed. Please try again.");
+        }
+    };
     return (
-        <Modal>
+        <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
             <Button className=" rounded-full bg-linear-to-r from-emerald-500 to-teal-500 font-semibold text-white mt-2">
                 Book Appointment
             </Button>
@@ -23,7 +42,7 @@ export function BookAppointmentForm({ doctorDetailsData, createAppointmentAction
                         </Modal.Header>
                         <Modal.Body className="px-2">
                             <Surface variant="default">
-                                <form action={createAppointmentAction} className="flex flex-col gap-4">
+                                <form onSubmit={onSubmit} className="flex flex-col gap-4">
                                     <TextField className="w-full" name="email" type="email" variant="secondary">
                                         <Label>User Email</Label>
                                         <Input placeholder="Enter your email" />

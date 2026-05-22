@@ -1,18 +1,35 @@
 "use client";
 
+import { useState } from "react";
 import { Envelope } from "@gravity-ui/icons";
 import { Button, Input, Label, Modal, Surface, TextField } from "@heroui/react";
 import { MdModeEdit } from "react-icons/md";
+import { toast } from "react-toastify";
 
 export function UpdateBooking({ booking, updateAction }) {
+    const [isOpen, setIsOpen] = useState(false);
 
-    const onSubmit = async (formData)=>{{
-        'use server'
-        await updateAction(formData, booking?._id)
-    }}
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+        const appointmentData = Object.fromEntries(formData.entries());
+
+        try {
+            const result = await updateAction(appointmentData, booking?._id);
+            if (result) {
+                toast.success("Booking updated");
+                setIsOpen(false);
+            } else {
+                toast.error("Update failed. Please try again.");
+            }
+        } catch (error) {
+            toast.error("Update failed. Please try again.");
+        }
+    };
 
     return (
-        <Modal>
+        <Modal isOpen={isOpen} onOpenChange={setIsOpen}>
             <Button variant='outline' className='flex justify-center items-center gap-2'> <MdModeEdit />Update Booking</Button>
             <Modal.Backdrop>
                 <Modal.Container placement="auto">
@@ -25,7 +42,7 @@ export function UpdateBooking({ booking, updateAction }) {
                         </Modal.Header>
                         <Modal.Body className="p-3">
                             <Surface variant="default">
-                                <form action = {onSubmit} className="flex flex-col gap-4">
+                                <form onSubmit={onSubmit} className="flex flex-col gap-4">
                                     <TextField className="w-full" name="doctor" type="text" variant="secondary" defaultValue={booking?.doctor} disabled>
                                         <Label>Doctor Name</Label>
                                         <Input placeholder="Enter doctor's name" />

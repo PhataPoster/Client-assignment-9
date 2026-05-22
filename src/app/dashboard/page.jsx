@@ -1,11 +1,16 @@
 import DashboardMain from '@/components/DashboardMain';
 import { deleteAppointment, updateAppointment } from '@/lib/actions';
 import { fetchAppointmentData } from '@/services/data';
+import { headers } from 'next/headers';
+import { auth } from '@/lib/auth';
 import React from 'react';
 
 
 const DashboardPage = async () => {
-    const bookings = await fetchAppointmentData();
+    const { token } = await auth.api.getToken({
+        headers :await headers()
+    })
+    const bookings = await fetchAppointmentData(token);
     return (
         <div className='bg-emerald-50 '>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-stretch py-12' >

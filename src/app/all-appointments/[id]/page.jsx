@@ -1,15 +1,20 @@
 import { BookAppointmentForm } from '@/components/BookAppointmentForm';
 import { createAppointment } from '@/lib/actions';
+import { auth } from '@/lib/auth';
 import { fetchDoctorDetailsData } from '@/services/data';
 import { Button } from '@heroui/react';
 import { MapPin, Clock, Star, Hospital, HandCoins, HandCoinsIcon } from 'lucide-react';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import React from 'react';
 
 const DoctorDetailsPage = async ({ params }) => {
     const { id } = await params
+    const { token } = await auth.api.getToken({
+        headers :await headers()
+    })
     // console.log(id);
-    const doctorDetailsData = await fetchDoctorDetailsData(id);
+    const doctorDetailsData = await fetchDoctorDetailsData(id, token);
     // console.log(id);
     return (
         <div className='bg-emerald-50 '>
@@ -84,7 +89,7 @@ const DoctorDetailsPage = async ({ params }) => {
                         <h1 className='text-2xl font-bold border-b-4 border-emerald-500 w-fit rounded-lg pb-2 mt-6'>Available Time Slots:</h1>
                     <div className='flex gap-x-2'>
                         {
-                            doctorDetailsData.availability.map((slot, index) => (
+                            doctorDetailsData?.availability.map((slot, index) => (
                                 <div key={index} className='bg-emerald-50 border border-emerald-500 rounded-lg p-1 mt-4 shadow-md shadow-emerald-200 text-sm font-semibold'>
                                     {slot}
                                 </div>
