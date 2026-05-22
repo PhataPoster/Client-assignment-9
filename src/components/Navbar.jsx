@@ -38,12 +38,12 @@ export function MainNavbar() {
     <nav
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "border-b border-emerald-200/70 bg-white/85 py-2 shadow-lg shadow-emerald-900/10 backdrop-blur-xl"
-          : "bg-transparent py-4"
+          ? "border-b border-emerald-200/70 bg-white/85 shadow-lg shadow-emerald-900/10 backdrop-blur-xl"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className={`flex h-16 items-center justify-between transition-all duration-300 ${scrolled ? "py-2" : "py-4"}`}>
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2 group">
               <div className="rounded-2xl bg-linear-to-br from-emerald-100 to-teal-100 p-1 shadow-sm">

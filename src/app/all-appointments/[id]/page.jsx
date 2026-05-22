@@ -19,14 +19,14 @@ const DoctorDetailsPage = async ({ params }) => {
     return (
         <div className='bg-emerald-50 '>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex flex-col md:flex-row gap-14 justify-center items-center'>
-                <div className='flex flex-col gap-2 items-center text-center md:text-left bg-white rounded-2xl overflow-hidden'>
-                    <div className="relative w-full md:w-92 h-92 bg-slate-100">
+                <div className='flex flex-col gap-2 items-center text-center md:text-left bg-white rounded-2xl overflow-hidden w-full md:w-80'>
+                    <div className="relative w-full h-72 sm:h-80 bg-slate-100">
                         <Image
                             src={doctorDetailsData?.image}
                             alt={doctorDetailsData?.name}
                             fill
                             className="object-cover w-full h-full"
-                            sizes="(max-width: 768px) 100vw, 256px"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
                         />
                     </div>
                     <div className='p-2'>
