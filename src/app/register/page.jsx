@@ -37,12 +37,13 @@ export default function SignUpPage() {
             name,
             image,
             email,
-            password
+            password,
         },
     );
     console.log(data, error);
     if (data) {
-        router.push("/login");
+      await authClient.signOut();
+      router.replace("/login");
     }
     else{
         toast.error(`Sign up failed: ${error.message}`);
