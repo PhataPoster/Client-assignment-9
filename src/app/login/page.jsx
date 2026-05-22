@@ -1,8 +1,8 @@
 "use client";
-import { Button } from "@heroui/react";
+import { Button, InputGroup } from "@heroui/react";
 import { Icon } from "@iconify/react";
 import { authClient } from "@/lib/auth-client";
-import { Check } from "@gravity-ui/icons";
+import { Check, EyeSlash } from "@gravity-ui/icons";
 import Logo from "../../assets/appointment.png";
 import {
   button,
@@ -17,6 +17,8 @@ import Link from "next/link";
 import { IconBase } from "react-icons";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { Eye } from "lucide-react";
+import { useState } from "react";
 
 export default function SignUpPage() {
 
@@ -48,19 +50,21 @@ export default function SignUpPage() {
       provider: "google",
     })
   }
+  
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div className="px-3 sm:px-0 mb-10">
       <Card className="border mx-auto w-115 py-10 mt-5">
         <div className="rounded-2xl bg-gradient-to-br from-emerald-100 to-teal-100 p-1 shadow-sm w-fit mx-auto">
-                                <Image
-                                  width={40}
-                                  height={40}
-                                  src={Logo}
-                                  alt="doctor appointment logo"
-                                  className="rounded-xl"
-                                />
-                              </div>
+          <Image
+            width={40}
+            height={40}
+            src={Logo}
+            alt="doctor appointment logo"
+            className="rounded-xl"
+          />
+        </div>
         <h1 className="text-center text-2xl font-bold">Log in</h1>
 
         <Form className="flex w-96 mx-auto flex-col gap-4" onSubmit={onSubmit}>
@@ -81,15 +85,30 @@ export default function SignUpPage() {
             <FieldError />
           </TextField>
 
-          <TextField
-            isRequired
-            minLength={8}
-            name="password"
-            type="password"
-          >
+          <TextField className="w-full " name="password">
             <Label>Password</Label>
-            <Input placeholder="Enter your password" />
-            <FieldError />
+            <InputGroup className="w-full" >
+              <InputGroup.Input
+                className="w-full "
+                type={isVisible ? "text" : "password"}
+                placeholder="Enter your password"
+
+              />
+              <InputGroup.Suffix className="pr-0">
+                <Button
+                  isIconOnly
+                  aria-label={isVisible ? "Hide password" : "Show password"}
+                  size="sm"
+                  variant="ghost"
+                  onPress={() => setIsVisible(!isVisible)}
+                >
+                  {isVisible ? <Eye className="size-4" /> : <EyeSlash className="size-4" />}
+                </Button>
+              </InputGroup.Suffix>
+            </InputGroup>
+          <Link href='/login' className="text-xs text-right text-blue-500 underline hover:cursor-pointer mt-1">
+            Forgot your password?
+          </Link>
           </TextField>
 
           <div className="mt-4">
